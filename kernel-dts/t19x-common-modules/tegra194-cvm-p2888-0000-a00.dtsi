@@ -27,6 +27,11 @@
 	#address-cells = <2>;
 	#size-cells = <2>;
 
+	cpuidle {
+		compatible = "nvidia,tegra19x-cpuidle";
+		status = "okay";
+	};
+
 	pmc@c360000 {
 		iopad-defaults {
 			sdmmc-io-pads {
@@ -46,6 +51,12 @@
 				target = <&gpcdma>;
 				_overlay_ {
 					nvidia,bypass-smmu;
+				};
+			};
+			override@1 {
+				target = <&{/cpuidle}>;
+				_overlay_ {
+					status = "disabled";
 				};
 			};
 		};
